@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>reservation</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="login-form-14/css/style.css">
+
+</head>
+<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<a href="/"><img src="assets/images/logo.png" class="logo"
+						alt=""></a>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+
+
+						<div class="img"
+							style="background-image: url(assets/images/home-bg.jpg);">
+						</div>
+
+
+
+
+
+
+						<div class="login-wrap p-4 p-md-5">
+							<div class="d-flex">
+								<div class="w-100">
+									<h3 class="mb-4">Reservation</h3>
+								</div>
+
+							</div>
+							<form action="/payment" method="get" class="signin-form">
+							
+								<div class="form-group mb-3">
+									<label for="cid">지점 선택</label><br> <select
+										name="cid" id="cid" class="form-control">
+										<option value="">==원하는 지점 선택==</option>
+										<option th:each="com : ${company}" th:value="${com.cid}"
+											th:text="${com.cname}">FAST</option>
+									</select>
+								</div>
+
+								<div class="form-group mb-3">
+									<label for="name">예약자명</label> <input type="text" name="rname"
+										id="rname" class="form-control" placeholder="예약자명" required>
+								</div>
+								<div class="form-group mb-3">
+									<label for="rtel">연락처</label><br> <input type="text"
+										name="rtel" id="rtel" class="form-control" placeholder="연락처"
+										required>
+								</div>
+
+
+								<div class="form-group mb-3">
+									<label for="date">예약 날짜</label><br> <input type="date"
+										name="date" id="date" class="form-control">
+								</div>
+
+								<div class="form-group mb-3">
+									<label for="adult_num">예약 인원(보호자):6,000￦ ※단위(명)</label><br> <select
+										name="adult_num" class="form-control" id="adult_num">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								</div>
+
+								<div class="form-group mb-3">
+									<label for="child_num">예약 인원(키즈):20,000￦ ※단위(명)</label><br>
+									<select name="child_num" class="form-control" id="child_num">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								</div>
+
+
+								<div class="form-group d-md-flex">
+									<div>
+										<label class="checkbox-wrap checkbox-primary mb-0">위의
+											내용은 사실과 다름 없음을 확인합니다 <input type="checkbox"> <span
+											class="checkmark"></span>
+										</label>
+									</div>
+
+								</div>
+
+
+								<div class="form-group">
+									<button id="insert"
+										class="form-control btn btn-primary rounded submit px-3">예약
+									</button>
+
+								</div>
+
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript"
+		src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+</html>

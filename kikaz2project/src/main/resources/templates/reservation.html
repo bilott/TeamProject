@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+
+
+	$(document).ready(function() {
+
+		var kids = 10;
+		
+		//년도 selectbox만들기               
+		for (var i = 0; i <= kids; i++) {
+			$('#kids').append('<option value="' + i + '">' + i);
+		}
+		
+	})
+	
+	
+</script>
+</head>
+<body>
+
+
+	<div>
+
+		<legend>예약</legend>
+		
+			지점 : <select name="cid" id="cid" class="form-select">
+				<option value="">==원하는 지점 선택==</option>
+				<option th:each="com : ${company}"
+					th:value="${com.cid}"
+					th:text="${com.cname}">FAST</option>
+			</select><br>
+
+			예약자명 : <input type="text" name="rname" id="rname"><br> 
+			예약자 전화번호 : <input type="text" name="rtel" id="rtel"><br> 
+			예약 날짜 : <input type="date" name="date" id="date"><br> 
+			예약 인원: <select name="kids" id="kids"></select> 명<br>
+			
+
+		<button id="insert">등록</button>
+		<button id="r_listall">예약자조회</button>
+	</div>
+	<script>
+		$('#insert').click(function() {
+			var jsonData = JSON.stringify({
+
+				rname : $('#rname').val(),
+				rtel : $('#rtel').val(),
+				date : $("#date").val(),
+				child_num : $("#kids").val(),
+				price : $("#kids").val() * 20000,
+				cid : $("#cid").val()
+
+			});
+			
+			$.ajax({
+				url : "http://localhost:9999/insert",
+				type : "POST",
+				data : jsonData,
+				contentType : "application/json",
+				headers : {
+					"Authorization" : "Basic " + btoa("havi" + ":" + "test")
+				},
+				dataType : "json",
+				success : function(data) {
+					alert('예약 성공!');
+					
+				},
+				error : function() {
+					alert('예약 실패!');
+				}
+			});
+
+		});
+
+		$('#r_listall').click(function() {
+			location.href = "/list";
+
+		});
+		 
+		
+	</script>
+</body>
+</html>

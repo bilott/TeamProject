@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+</head>
+<body>
+<div>
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">예약번호</th>
+					<th scope="col">예약자명</th>
+					<th scope="col">예약자번호</th>
+					<th scope="col">인원수</th>
+					<th scope="col">가격</th>
+					<th scope="col">키즈카페명</th>
+					<th scope="col">예약날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="res : ${reservation}">
+					<td th:text="${res.rid}"></td>
+					<td th:text="${res.rname}"></td>
+					<td th:text="${res.rtel}"></td>
+					<td th:text="${res.child_num}"></td>
+					<td th:text="${res.price}"></td>
+					<td th:text="${res.company?.cname}"></td>
+					<td th:text="${res.date}"></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

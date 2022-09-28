@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>예약 정보</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
+	rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="contact-form-05/css/style.css">
+
+</head>
+<body>
+	<input id="reservation_rid" type="hidden" th:value="${res?.rid}" />
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<a href="/"> <img src="assets/images/logo.png" class="logo"
+						alt="">
+					</a>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<div class="wrapper">
+						<div class="row no-gutters">
+							<div class="col-lg-6">
+								<div class="contact-wrap w-100 p-md-5 p-4">
+									<h3>예약정보</h3>
+									<p class="mb-4">예약 정보가 다를 경우 아래 폼을 통해 문의 부탁드립니다.</p>
+									<div id="form-message-warning" class="mb-4"></div>
+
+
+									<form id="contactForm" name="contactForm" class="contactForm">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													예약번호:<input type="text" class="form-control" name="rid"
+														id="rid" th:value="${res.rid}" disabled="disabled" />
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													예약자명<input type="text" class="form-control" name="rname"
+														id="rname" th:value="${res.rname}" disabled="disabled">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													예약자 전화번호<input type="text" class="form-control" name="rtel"
+														id="rtel" th:value="${res.rtel}" disabled="disabled">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													예약 날짜<input type="text" class="form-control" name="date"
+														id="date" th:value="${res.date}" disabled="disabled">
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<div class="form-group">
+													예약 인원(보호자)<input type="text" class="form-control"
+														name="adult_num" th:value="${res.adult_num}"
+														id="adult_num" disabled="disabled">
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<div class="form-group">
+													예약 인원(키즈)<input type="text" class="form-control"
+														name="child_num" th:value="${res.child_num}"
+														id="child_num" disabled="disabled">
+												</div>
+											</div>
+
+
+											<div class="col-md-12">
+												<div class="form-group">
+													가격<input type="text" class="form-control" name="price"
+														id="price" th:value="${res.price}" disabled="disabled">
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<div class="form-group">
+													지점<input type="text" class="form-control" name="cname"
+														id="cname" th:value="${res.company?.cname}"
+														disabled="disabled">
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<textarea name="message" class="form-control" id="message"
+														cols="30" rows="4"
+														placeholder="해당지점의 전화번호로 문의를 남겨주시기를 바랍니다."></textarea>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<button type="button" class="btn btn-primary"
+														onclick="location.href='http://localhost:9999/list' ">확인</button>
+													<a th:href="@{/qr(url=${res.rid})}">
+														<button type="button" class="btn btn-primary">입장하기</button>
+													</a>
+													<button type="button" class="btn btn-primary" id="delete">예약취소</button>
+													<div class="submitting"></div>
+												</div>
+											</div>
+										</div>
+									</form>
+
+								</div>
+							</div>
+							<div class="col-lg-6 d-flex align-items-stretch">
+								<div class="info-wrap w-100 p-5 img"
+									style="background-image: url(contact-form-05/images/img.jpg);">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+		$('#delete').click(function() {
+
+			$.ajax({
+				url : "http://localhost:9999/delete",
+				type : "POST",
+				data : {
+					rid : $('#reservation_rid').val()
+				},
+				success : function() {
+					alert('삭제 성공!');
+
+					location.href = '/list';
+				},
+				error : function() {
+					alert('삭제 실패!');
+				}
+			});
+		});
+	</script>
+</body>
+</html>
